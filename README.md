@@ -19,7 +19,7 @@ Chinese share links is a plugin for Discourse to add share links for Weibo & Ren
 
 最后一行 `- git clone https://github.com/discourse/docker_manager.git` 后添加：
 
-    - git clone https://github.com/fantasticfears/chinese-share-links.git
+    - git clone https://github.com/arrayest/chinese-share-links.git
 
 ## Usage / 使用
 
