@@ -52,3 +52,15 @@ import Sharing from 'discourse/lib/sharing';
       shouldOpenInPopup: true,
       popupHeight: 200
     });
+
+var _sources = {};
+
+export default {
+  addSource(source) {
+    _sources[source.id] = source;
+  },
+
+  activeSources(linksSetting) {
+    return linksSetting.split('|').map(s => _sources[s]).compact();
+  }
+};
