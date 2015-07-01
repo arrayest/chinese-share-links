@@ -1,27 +1,16 @@
 import Sharing from 'discourse/lib/sharing';
-    /*
-    ```javascript
-    Sharing.addSource({
 
-      // This id must be present in the `share_links` site setting too
-      id: 'twitter',
+export default {
+  name: 'sharing-links',
 
-      // The icon that will be displayed, choose between font awesome class name `faIcon` and custom HTML `htmlIcon`.
-      // When both provided, prefer `faIcon`
-      faIcon: 'fa-twitter-square',
-      htmlIcon: '<img src="example.com/example.jpg">',
-
-      // A callback for generating the remote link from the `link` and `title`
-      generateUrl: function(link, title) {
-        return "http://twitter.com/intent/tweet?url=" + encodeURIComponent(link) + "&text=" + encodeURIComponent(title);
-      },
-
-      // If true, opens in a popup of `popupHeight` size. If false it's opened in a new tab
-      shouldOpenInPopup: true,
-      popupHeight: 265
-    });
-    ```
-    */
+  initialize: function() {
+    // Backwards compatibility
+    Discourse.ShareLink = {};
+    Discourse.ShareLink.addTarget = function(id, source) {
+      Ember.warn('Discourse.ShareLink.addTarget is deprecated. Import `Sharing` and call `addSource` instead.');
+      source.id = id;
+      Sharing.addSource(source);
+    };
 
     Sharing.addSource({
       id: 'weibo',
@@ -53,14 +42,5 @@ import Sharing from 'discourse/lib/sharing';
       popupHeight: 200
     });
 
-var _sources = {};
-
-export default {
-  addSource(source) {
-    _sources[source.id] = source;
-  },
-
-  activeSources(linksSetting) {
-    return linksSetting.split('|').map(s => _sources[s]).compact();
   }
 };
